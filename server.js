@@ -12,7 +12,7 @@ var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 var apiKey = defaultClient.authentications["api-key"];
 apiKey.apiKey =
-  "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";
+  "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";
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
