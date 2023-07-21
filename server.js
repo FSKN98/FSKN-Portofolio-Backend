@@ -12,7 +12,7 @@ var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 var apiKey = defaultClient.authentications["api-key"];
 apiKey.apiKey =
-  "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";
+  "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";
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
@@ -59,14 +59,21 @@ app.post("/mail", (req, res) => {
   };
   sendSmtpEmail.templateId = 1;
   sendSmtpEmail.params = req.body;
-  apiInstance.sendTransacEmail(sendSmtpEmail).then(
-    function (data) {
-      console.log(data);
-    },
-    function (error) {
-      console.log(error.message);
-    }
-  );
+  apiInstance
+    .sendTransacEmail(sendSmtpEmail)
+    .then(
+      function (data) {
+        return res.status(200).json(data);
+      },
+      function (error) {
+        return res.status(400).json(error.message);
+      }
+    )
+    .catch(() => {
+      return res
+        .status(400)
+        .json({ message: "Une erreur s'est produite lors de l'envoi du mail" });
+    });
 });
 
 app.listen(port, hostname, () => {
